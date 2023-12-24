@@ -1,0 +1,14 @@
+version: "3.4" #version ของ docker-compose file
+#เริ่มต้นส่วนของ services
+services:
+  ha: #ชื่อ service
+    image: homeassistant/home-assistant #image ของ service
+    restart: always #การ restart
+    container_name: ha #ชื่อ container
+    ports: #port ที่เราใช้งาน จริงๆไม่ต้องใส่ก็ได้ครับ
+      - 8123:8123
+    environment: #ค่า environment ต่างๆ
+      - TZ=Asia/Bangkok #กำหนด timezone ให้ HA
+    volumes: #map folder จากเครื่อง host เราไปให้ container
+      - ./ha-config:/config
+    network_mode: host #กำหนดให้ใช้ network ของ host เลย
